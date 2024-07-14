@@ -1,0 +1,42 @@
+# settings to start container with docker compose up
+# you may need other settings in your environment
+
+services:
+  hans:
+    container_name: hans_container
+    image: kluengels/hans:latest
+    # limit ressources
+    deploy:
+      ressources:
+        limits:
+          cpus: "0.50"
+          memory: "1g"
+    restart: always
+    expose:
+      - 3000
+    environment:
+      # loading settings from .env
+      - NEXT_SUPABASE_URL=${NEXT_SUPABASE_URL}
+      - NEXT_SUPABASE_ANON_KEY=${NEXT_SUPABASE_ANON_KEY}
+      - NEXT_CRYTR_KEY=${NEXT_CRYTR_KEY}
+      - NEXT_PUBLIC_OPENAI_PRICE=${NEXT_PUBLIC_OPENAI_PRICE}
+      - NEXT_OPENAI_KEY=${NEXT_OPENAI_KEY}
+      - NEXT_EMAIL_HOST=${NEXT_EMAIL_HOST}
+      - NEXT_EMAIL_PORT=${NEXT_EMAIL_PORT}
+      - NEXT_EMAIL_USER=${NEXT_EMAIL_USER}
+      - NEXT_EMAIL_PASS=${NEXT_EMAIL_PASS}
+      - NEXT_EMAIL_TO=${NEXT_EMAIL_TO}
+      - NEXT_UMAMI_URL=${NEXT_UMAMI_URL}
+      - NEXT_UMAMI_ID=$(NEXT_UMAMI_ID)
+      - NEXT_YBUG=${NEXT_YBUG}
+    volumes:
+      - /mnt/volume-1/tmpFiles:/app/.next/server/app/tmpFiles:rw
+      # local development
+      # - ./tmpFiles:/app/.next/server/app/tmpFiles:rw
+    # ports:
+    #   - "3000:3000"
+
+networks:
+  default:
+    external: true
+    name: custom

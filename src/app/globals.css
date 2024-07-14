@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background-color: #dee5e5ff;
+    --accent-color: #9dc5bbff;
+    --text-color: #1c1d21ff;
+    --action-color: #d72638ff;
+    --actionlight-color: #f0959e;
+    --warning-color: #ff570aff;
+  }
+}
+
+@layer base {
+  h1 {
+    @apply text-3xl;
+  }
+  h2 {
+    @apply text-2xl;
+  }
+  h3 {
+    @apply text-xl;
+  }
+}
+
